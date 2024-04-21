@@ -7,13 +7,15 @@ public class RubyController : MonoBehaviour
 {
 
     public float speed = 3.0f;
-
     public int maxHealth = 5;
 
     public GameObject projectilePrefab;
 
     public AudioClip throwSound;
     public AudioClip hitSound;
+    public AudioClip croak;
+
+    public AudioClip gameOver;
 
     public ParticleSystem hitEffect;
     public ParticleSystem healthPickup;
@@ -87,6 +89,8 @@ public class RubyController : MonoBehaviour
                 if (character != null)
                 {
                     character.DisplayDialog();
+                    PlaySound(croak);
+                    //Timothy made this change
 
                     if (Input.GetKey(KeyCode.R))
                     {
@@ -134,18 +138,19 @@ public class RubyController : MonoBehaviour
         Debug.Log(currentHealth + "/" + maxHealth);
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
 
-
         if (health <= 0 && !isDead)
         {
-           
             isDead = true;
             gameManger.gameover(); 
+            PlaySound(gameOver);
+            //Rachelle change
             gameObject.SetActive(false);
-           
             Debug.Log("Dead");
-        }
-    }
 
+        }
+
+    }
+    
     void Launch()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
@@ -165,3 +170,4 @@ public class RubyController : MonoBehaviour
 
     
 }
+

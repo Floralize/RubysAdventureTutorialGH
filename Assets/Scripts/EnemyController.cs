@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     public float speed;
     public bool vertical;
     public float changeTime = 3.0f;
+    public AudioClip fix;
 
     public ParticleSystem smokeEffect;
     
@@ -89,4 +90,6 @@ public class EnemyController : MonoBehaviour
         smokeEffect.Stop();
 
     }
+    public void PlaySound(AudioClip fix) => PlaySound(fix);
+    //Timothy change
 }
